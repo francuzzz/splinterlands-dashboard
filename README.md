@@ -38,7 +38,7 @@ Navigate to [http://localhost:3000](http://localhost:3000). The app will automat
 ## What's included
 
 Within the download you'll find the following directories and files, logically grouping common assets and providing both compiled and minified variations. You'll see something like this:
-- Create .accountData.json file (see /src/json/accountData-example.json)
+- Create accountData.json file (see /src/json/accountData-example.json)
 
 ```
 Example:
