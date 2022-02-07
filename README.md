@@ -70,8 +70,3 @@ REACT_APP_AUTO_UPDATE=30
 REACT_APP_API_DOMAIN_NAME=localhost:8080
 ```
 
-
-## Support
-
-- [Telegram chat](https://t.me/devkaimi).
-- [Discord](Kaneki#6285).
