@@ -117,10 +117,10 @@ class Dashboard extends React.Component {
 
     accounts.sort(function (a, b) { return a - b }).forEach(async (account, i) => {
       let [detailResponse, balanceResponse, questResponse, collectionResponse] = await Promise.all([
-        axios.get(`https://api.splinterlands.io/players/details?name=${account.AccountName}`),
-        axios.get(`https://api.splinterlands.io/players/balances?username=${account.AccountName}`),
-        axios.get(`https://api.splinterlands.io/players/quests?username=${account.AccountName}`),
-        axios.get(`https://api.splinterlands.io/cards/collection/${account.AccountName}`),
+        axios.get(`https://api2.splinterlands.com/players/details?name=${account.AccountName}`),
+        axios.get(`https://api2.splinterlands.com/players/balances?username=${account.AccountName}`),
+        axios.get(`https://api2.splinterlands.com/players/quests?username=${account.AccountName}`),
+        axios.get(`https://api2.splinterlands.com/cards/collection/${account.AccountName}`),
       ]);
 
       if (detailResponse.data.error != undefined && detailResponse.data.error.includes("not found.")) {
@@ -134,7 +134,7 @@ class Dashboard extends React.Component {
 
       let trsactionResponse;
       if (questResponse.data.length != 0 && questResponse.data[0].claim_trx_id != null) {
-        trsactionResponse = await axios.get(`https://api.splinterlands.io/transactions/lookup?trx_id=${questResponse.data[0].claim_trx_id}`);
+        trsactionResponse = await axios.get(`https://api2.splinterlands.com/transactions/lookup?trx_id=${questResponse.data[0].claim_trx_id}`);
       }
 
       let data = {
@@ -182,7 +182,7 @@ class Dashboard extends React.Component {
   // async getTransaction(trxid) {
   //   this.setInfo(!this.state.info);
   //   let [trxResponse] = await Promise.all([
-  //     axios.get(`https://api.splinterlands.io/transactions/lookup?trx_id=${trxid}`)
+  //     axios.get(`https://api2.splinterlands.com/transactions/lookup?trx_id=${trxid}`)
   //   ]);
   //   await this.setState({ transactionInfo: JSON.parse(trxResponse.data.trx_info.result).rewards });
   // }
@@ -256,7 +256,7 @@ class Dashboard extends React.Component {
   }
 
   async getCardByUID(uid) {
-    return await axios.get(`https://api.splinterlands.io/cards/find?ids=${uid}`)
+    return await axios.get(`https://api2.splinterlands.com/cards/find?ids=${uid}`)
       .then(response => {
         return response.data[0].details;
       })
@@ -264,7 +264,7 @@ class Dashboard extends React.Component {
   }
 
   getCardDetails() {
-    axios.get(`https://api.splinterlands.io/cards/get_details`)
+    axios.get(`https://api2.splinterlands.com/cards/get_details`)
       .then(response => {
         this.setState({ cardDetails: response.data });
       })
@@ -286,9 +286,9 @@ class Dashboard extends React.Component {
     this.setState({ disabled: true });
 
     let [detailResponse, balanceResponse, questResponse] = await Promise.all([
-      axios.get(`https://api.splinterlands.io/players/details?name=${accountName}`),
-      axios.get(`https://api.splinterlands.io/players/balances?username=${accountName}`),
-      axios.get(`https://api.splinterlands.io/players/quests?username=${accountName}`),
+      axios.get(`https://api2.splinterlands.com/players/details?name=${accountName}`),
+      axios.get(`https://api2.splinterlands.com/players/balances?username=${accountName}`),
+      axios.get(`https://api2.splinterlands.com/players/quests?username=${accountName}`),
     ]);
 
     let indexDEC = balanceResponse.data.findIndex(x => x.token === "DEC");
@@ -296,7 +296,7 @@ class Dashboard extends React.Component {
 
     let trsactionResponse;
     if (questResponse.data.length != 0 && questResponse.data[0].claim_trx_id != null) {
-      trsactionResponse = await axios.get(`https://api.splinterlands.io/transactions/lookup?trx_id=${questResponse.data[0].claim_trx_id}`);
+      trsactionResponse = await axios.get(`https://api2.splinterlands.com/transactions/lookup?trx_id=${questResponse.data[0].claim_trx_id}`);
     }
 
     let ecr_cal = ((detailResponse.data.capture_rate / 100) + ((new Date() - new Date(balanceResponse.data[indexECR] == undefined ? 0 : balanceResponse.data[indexECR].last_reward_time)) / (1000 * 60 * 60) * 1.041)).toFixed(2);
@@ -572,8 +572,8 @@ class Dashboard extends React.Component {
                 // closeOnBackdrop={false}
                 >
                   <CModalHeader closeButton>
-                    {/* https://api.splinterlands.io/transactions/lookup?trx_id= */}
-                    <CModalTitle>Reward information <a href={'https://api.splinterlands.io/transactions/lookup?trx_id=' + this.state.questClaimTrxID} target="_blank">{this.state.questClaimTrxID}</a></CModalTitle>
+                    {/* https://api2.splinterlands.com/transactions/lookup?trx_id= */}
+                    <CModalTitle>Reward information <a href={'https://api2.splinterlands.com/transactions/lookup?trx_id=' + this.state.questClaimTrxID} target="_blank">{this.state.questClaimTrxID}</a></CModalTitle>
                   </CModalHeader>
                   <CModalBody>
                     <CRow className="justify-content-md-center" key={this.state.questClaimTrxID} xs={{ gutterY: 5 }} md={{ gutterY: 5 }}>
