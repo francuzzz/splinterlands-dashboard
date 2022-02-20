@@ -15,7 +15,7 @@ Node js [Node js download](https://nodejs.org/en/)
 
 ``` bash
 # clone the repo
-$ git clone https://github.com/nguyenphuocdai/splinterlands-dashboard.git splinterlands-dashboard
+$ git clone https://github.com/francuzzz/splinterlands-dashboard.git splinterlands-dashboard
 
 # go into app's directory
 $ cd splinterlands-dashboard
